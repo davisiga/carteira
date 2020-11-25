@@ -1,0 +1,15 @@
+@media only screen and (max-device-width: 1780px) {
+    .title{
+        text-align: center;
+        text-decoration: double;
+    }
+    .tituloTabela{
+        margin-left: 650px;
+        margin-top: -40px;
+    }
+    .tabela{
+        margin-left: 670px;
+        margin-top: -66px;
+        
+    } 
+}
