@@ -2,27 +2,45 @@
 function addLinha(){
     var valorInvest = document.getElementById("idValor").value;
     var dataInvest = document.getElementById("idData").value;
+    var tipo = document.getElementById("idRenda").value;
     var tableRF = document.getElementById("tableRF");
+    var tabelaRV = document.getElementById("tabelaRV")
+ 
+    if(valorInvest != '' && dataInvest != ''){
+        if(tipo == "RENDA-FIXA"){
+            var tr = document.createElement("tr");
+            var tdData  = document.createElement("td");
+            tdData.textContent = dataInvest;
+            tr.appendChild(tdData);
+           
+            var tdValor = document.createElement("td");
+            tdValor.textContent = valorInvest;
+            tr.appendChild(tdValor);
     
-    if(valorInvest == ''){
-        alert("Não é possivel inserir um investimento sem o valor!");
-    }else{
-        alert(dataInvest)
-        var tr = document.createElement("tr");
-        var tdData  = document.createElement("td");
-        tdData.textContent = dataInvest;
-        tr.appendChild(tdData);
-       
-        var tdValor = document.createElement("td");
-        tdValor.textContent = valorInvest;
-        tr.appendChild(tdValor);
+            var tdButton =  document.createElement("td");
+            tdButton.appendChild(criarButton());
+            tr.appendChild(tdButton)
+            tableRF.appendChild(tr);
 
-        var tdButton =  document.createElement("td");
-        tdButton.appendChild(criarButton());
-        tr.appendChild(tdButton)
-        tableRF.appendChild(tr);
+        }else{
 
-
+            var tr = document.createElement("tr");
+            var tdData  = document.createElement("td");
+            tdData.textContent = dataInvest;
+            tr.appendChild(tdData);
+           
+            var tdValor = document.createElement("td");
+            tdValor.textContent = valorInvest;
+            tr.appendChild(tdValor);
+    
+            var tdButton =  document.createElement("td");
+            tdButton.appendChild(criarButton());
+            tr.appendChild(tdButton)
+            tabelaRV.appendChild(tr);    
+        }
+    }else{     
+        alert("Não é possivel inserir um investimento sem o tipo, valor e a data!");
+        window.location.reload();
     }
 }
 //Função para criar um botão na linha e remover a mesma se acionado.    
@@ -38,17 +56,30 @@ function criarButton(){
     return button;
 }
 
-// function maskValor(){
-//     var valor = document.getElementById('idValor');
-//     var er = new RegExp("[0-9]+");
-//     if(er.test(valor.value)){
-//         if(valor.value.length == 2 || valor.value.length == 6){
-//           valor.value += ".";
-//     }else if(rg.value.length == 10){
-//       valor.value += "-";
-//     }
-// }else{
-//         alert("Favor preencher apenas com números");
-//         valor.value = "";
-//     } 
-// }
+//Chart
+window.onload = function chart(){
+    var valorF = 50;
+    var valorV = 30;
+    var ctx = document.getElementById("bar-chart")
+
+    var myBarChart = new Chart(ctx, {
+    type: 'pie',
+
+    data: {
+        labels: ['Renda Fixa', 'Renda Variável'],
+
+        datasets: [{
+            label: 'Valores por tipo de investimento',
+            data:[valorF, valorF],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                ],
+            }]
+        }
+    });
+}
